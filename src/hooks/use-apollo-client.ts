@@ -21,7 +21,7 @@ const createApolloClient = () => {
   });
 };
 
-const initializeApollo = (initialState: any) => {
+export const getApolloClient = (initialState?: any) => {
   const _client = client = createApolloClient();
   if (initialState) {
     const existingCache = _client.extract();
@@ -36,7 +36,7 @@ const initializeApollo = (initialState: any) => {
   return _client;
 }
 
-export const useApollo = (initialState: any) => {
-  const store = useMemo(() => initializeApollo(initialState), [initialState]);
+export const useApollo = (initialState?: any) => {
+  const store = useMemo(() => getApolloClient(initialState), [initialState]);
   return store;
 };
