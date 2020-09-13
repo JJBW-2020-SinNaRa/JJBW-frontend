@@ -4,17 +4,23 @@ import React, {
 } from "react";
 import Head from "next/head";
 import {
+  ApolloClient,
+  ApolloProvider,
+} from "@apollo/client";
+import {
   NextComponentType,
   NextPageContext,
 } from "next";
 
 interface LayoutProps {
-  pageProps: any;
   Component: NextComponentType<NextPageContext, any, {}>;
+  client: ApolloClient<any>;
+  pageProps: any;
 }
 
 const Layout: FC<LayoutProps> = ({
   Component,
+  client,
   pageProps,
 }) => {
   return (
@@ -28,7 +34,9 @@ const Layout: FC<LayoutProps> = ({
         <link rel={"apple-touch-icon"} href={`${process.env.NEXT_PUBLIC_URL}/logo-192.png`} />
         <title>JJBW</title>
       </Head>
-      <Component {...pageProps} />
+      <ApolloProvider client={client}>
+        <Component {...pageProps} />
+      </ApolloProvider>
     </Fragment>
   );
 };
