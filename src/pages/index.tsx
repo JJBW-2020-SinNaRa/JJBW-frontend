@@ -3,6 +3,7 @@ import {
   NextPage,
 //   NextPageContext,
 } from "next";
+import {LoginTemplate} from "../views/templates/Login";
 // import {
 //   gql,
 // } from "@apollo/client";
@@ -55,15 +56,7 @@ const IndexPage: NextPage = (props) => {
         </div>
       );
     case "LOGIN":
-      return (
-        <div>
-          LOGIN
-          
-          <button onClick={() => setUserAccount('user1')}>USER1</button>
-          <button onClick={() => setUserAccount('user2')}>USER2</button>
-          <button onClick={() => setUserAccount('admin1')}>admin</button>
-        </div>
-      );
+      return <LoginTemplate updateUserAcc={setUserAccount} />
     case "HOME":
       return (
         <div>
