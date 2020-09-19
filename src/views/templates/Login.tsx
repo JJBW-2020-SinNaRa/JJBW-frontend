@@ -1,17 +1,35 @@
 import {Helmet} from "react-helmet";
 import React, {ReactElement} from "react";
 import {UserAccounts} from "../../pages/";
+import {useMutation} from "@apollo/client";
+import {LOGIN_QUERY} from "../../graphql";
+import {Account} from "../../graphql";
 
 export type LoginProps = {
-  updateUserAcc? : (id: UserAccounts) => void;
+  updateUserAcc? : (account: Account) => void;
 }
 
 export const LoginTemplate = ({updateUserAcc}: LoginProps): ReactElement => {
-  const login = async (id: UserAccounts) => {
-    
+  const [login] = useMutation(LOGIN_QUERY)
   
-    if (updateUserAcc) {
-      updateUserAcc(id)
+  const handleLogin = async (id: UserAccounts) => {
+    try {
+      const {data} = await login({
+        variables: {
+          id
+        }
+      })
+      
+      localStorage.setItem(
+        "token",
+        data.getAccessTokenByID.token
+      )
+  
+      if (updateUserAcc) {
+        updateUserAcc(data.getAccessTokenByID.account)
+      }
+    } catch (err) {
+      console.error(err.toString())
     }
   }
   
@@ -24,7 +42,7 @@ export const LoginTemplate = ({updateUserAcc}: LoginProps): ReactElement => {
         {[UserAccounts.USER1, UserAccounts.USER2, UserAccounts.ADMIN1]
           .map((account) => (
             <li key={account}>
-              <button onClick={() => login(account)}>{account}</button>
+              <button onClick={() => handleLogin(account)}>{account}</button>
             </li>
           ))}
       </ul>

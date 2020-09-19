@@ -2,6 +2,7 @@ import React, {ReactElement, useEffect, useState} from "react";
 import {SplashTemplate} from "../views/templates/Splash";
 import {LoginTemplate} from "../views/templates/Login";
 import {AdminHomeTemplate, UserHomeTemplate} from "src/views/templates/Home";
+import {Account} from "../graphql";
 
 export enum HomePageStatus {
   SPLASH = "SPLASH",
@@ -19,7 +20,7 @@ export type HomePageProps = {};
 
 export const HomePage = ({}: HomePageProps): ReactElement => {
   const [pageStatus, setPageStatus] = useState<HomePageStatus>(HomePageStatus.SPLASH);
-  const [userAccount, setUserAccount] = useState<UserAccounts | null>(null);
+  const [userAccount, setUserAccount] = useState<Account | null>(null);
   const [isServiceLoaded, setIsServiceLoaded] = useState(false);
   
   // 앱의 상태에 따라 useEffect 업데이트
@@ -59,7 +60,7 @@ export const HomePage = ({}: HomePageProps): ReactElement => {
     case HomePageStatus.LOGIN:
       return <LoginTemplate updateUserAcc={setUserAccount} />
     case HomePageStatus.HOME:
-      return userAccount?.includes('admin')
+      return userAccount?.id?.includes('admin')
         ? <AdminHomeTemplate />
         : <UserHomeTemplate />
     default :
