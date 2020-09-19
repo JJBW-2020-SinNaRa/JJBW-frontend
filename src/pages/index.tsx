@@ -13,13 +13,25 @@ import {AdminHomeTemplate, UserHomeTemplate} from "../views/templates/Home";
 //   getApolloClient,
 // } from "src/hooks";
 
-export type IndexPageStatus = "SPLASH" | "LOGIN" | "HOME";
+export enum IndexPageStatus {
+ SPLASH = "SPLASH",
+ LOGIN = "LOGIN",
+ HOME = "HOME",
+}
 
-export type UserAccount = "user1" | "user2" | "admin1" | null
+export enum UserAccountList {
+  USER1 = "user1",
+  USER2 = "user2",
+  ADMIN1 = "admin1"
+}
 
-const IndexPage: NextPage = (props) => {
+export type UserAccount = UserAccountList | null;
+
+export type IndexPageProps = {}
+
+const IndexPage: NextPage = ({} : IndexPageProps) => {
   // return (<div>{props["_"]}</div>);
-  const [pageStatus, setPageStatus] = useState<IndexPageStatus>('SPLASH');
+  const [pageStatus, setPageStatus] = useState<IndexPageStatus>(IndexPageStatus.SPLASH);
   const [userAccount, setUserAccount] = useState<UserAccount>(null);
   const [isServiceLoaded, setIsServiceLoaded] = useState(false);
   
@@ -29,11 +41,11 @@ const IndexPage: NextPage = (props) => {
     
     // splash 조건 (로그인 X, 서비스 로딩 X)
     if (!loaded) {
-      updateStatus('SPLASH');
+      updateStatus(IndexPageStatus.SPLASH);
       
       setTimeout(() => {
         setIsServiceLoaded(true);
-        updateStatus('LOGIN');
+        updateStatus(IndexPageStatus.LOGIN);
       }, 100);
       
       return;
@@ -41,13 +53,13 @@ const IndexPage: NextPage = (props) => {
     
     // login 조건 (로그인 X, 서비스 로딩 O)
     if (!account && loaded) {
-      updateStatus('LOGIN');
+      updateStatus(IndexPageStatus.LOGIN);
       return;
     }
     
     // home 조건 (로그인 O, 서비스 로딩 O)
     if (account && loaded) {
-      updateStatus('HOME');
+      updateStatus(IndexPageStatus.HOME);
       return;
     }
     
@@ -55,13 +67,13 @@ const IndexPage: NextPage = (props) => {
   }, [userAccount, isServiceLoaded]);
   
   switch (pageStatus) {
-    case "SPLASH":
+    case IndexPageStatus.SPLASH:
       return (
         <SplashTemplate />
       );
-    case "LOGIN":
+    case IndexPageStatus.LOGIN:
       return <LoginTemplate updateUserAcc={setUserAccount} />
-    case "HOME":
+    case IndexPageStatus.HOME:
       console.debug('goto home')
       return userAccount.includes('admin')
         ? <AdminHomeTemplate />
