@@ -53,7 +53,7 @@ const TrashIndexPage = ({ id }: TrashIndexProps): ReactElement => {
           </div>
         </div>
         
-        <Link href="/">
+        <Link href={`${id}/complete`}>
           <a>처리하기</a>
         </Link>
       </section>
