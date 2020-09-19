@@ -28,6 +28,12 @@ const IndexPage: NextPage = (props) => {
     // splash 조건 (로그인 X, 서비스 로딩 X)
     if (!loaded) {
       updateStatus('SPLASH');
+      
+      setTimeout(() => {
+        setIsServiceLoaded(true);
+        updateStatus('LOGIN');
+      }, 100);
+      
       return;
     }
     
