@@ -15,7 +15,10 @@ const createApolloClient = () => {
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
       uri: `${process.env.NEXT_PUBLIC_API_URL}/graph`,
-      credentials: "same-origin",
+      credentials: "include",
+      fetchOptions: {
+        mode: "no-cors"
+      }
     }),
     cache: new InMemoryCache()
   });
