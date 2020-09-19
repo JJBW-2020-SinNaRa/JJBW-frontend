@@ -1,4 +1,6 @@
 import Head from "next/head";
+import {gql} from '@apollo/client'
+import {getApolloClient} from "../../hooks";
 import React, {ReactElement} from "react";
 import {UserAccount} from "../../pages";
 
@@ -7,6 +9,16 @@ export type LoginProps = {
 }
 
 export const LoginTemplate = ({updateUserAcc} : LoginProps) : ReactElement => {
+  const login = async (acc) => {
+    const client = getApolloClient()
+    // const {data} = await client.query({
+    //   query: gql``
+    // });
+    //
+    // console.debug(data)
+    updateUserAcc(acc)
+  }
+  
   return (
     <div>
       <Head>
@@ -15,7 +27,7 @@ export const LoginTemplate = ({updateUserAcc} : LoginProps) : ReactElement => {
       <ul>
         {['user1', 'user2', 'admin1'].map((account : UserAccount) => (
           <li key={account}>
-            <button onClick={() => updateUserAcc(account)}>{account}</button>
+            <button onClick={() => login(account)}>{account}</button>
           </li>
         ))}
       </ul>
