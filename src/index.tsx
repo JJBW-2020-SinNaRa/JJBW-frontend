@@ -1,9 +1,10 @@
 import React from "react";
 import App from "./App"
 import ReactDOM from 'react-dom';
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/react-hooks";
+import {GlobalStyle} from "./views/GlobalStyles";
 import { BrowserRouter } from "react-router-dom";
 import { createUploadLink } from "apollo-upload-client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/react-hooks";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -15,7 +16,8 @@ const client = new ApolloClient({
 ReactDOM.render((
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <App />
+      <GlobalStyle />
+      <App/>
     </BrowserRouter>
   </ApolloProvider>
 ), document.getElementById('root'));
