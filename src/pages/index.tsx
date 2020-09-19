@@ -5,6 +5,7 @@ import {
 } from "next";
 import {SplashTemplate} from "../views/templates/Splash";
 import {LoginTemplate} from "../views/templates/Login";
+import {AdminHomeTemplate, UserHomeTemplate} from "../views/templates/Home";
 // import {
 //   gql,
 // } from "@apollo/client";
@@ -61,11 +62,10 @@ const IndexPage: NextPage = (props) => {
     case "LOGIN":
       return <LoginTemplate updateUserAcc={setUserAccount} />
     case "HOME":
-      return (
-        <div>
-          HOME
-        </div>
-      );
+      console.debug('goto home')
+      return userAccount.includes('admin')
+        ? <AdminHomeTemplate />
+        : <UserHomeTemplate />
     default :
       throw new Error(`pageStatus is not correct : ${pageStatus}`);
   }
