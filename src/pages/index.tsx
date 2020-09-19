@@ -74,7 +74,6 @@ const IndexPage: NextPage = ({} : IndexPageProps) => {
     case IndexPageStatus.LOGIN:
       return <LoginTemplate updateUserAcc={setUserAccount} />
     case IndexPageStatus.HOME:
-      console.debug('goto home')
       return userAccount.includes('admin')
         ? <AdminHomeTemplate />
         : <UserHomeTemplate />
