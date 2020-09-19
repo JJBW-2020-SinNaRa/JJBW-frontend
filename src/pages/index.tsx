@@ -3,6 +3,7 @@ import {
   NextPage,
 //   NextPageContext,
 } from "next";
+import {SplashTemplate} from "../views/templates/Splash";
 import {LoginTemplate} from "../views/templates/Login";
 // import {
 //   gql,
@@ -55,11 +56,7 @@ const IndexPage: NextPage = (props) => {
   switch (pageStatus) {
     case "SPLASH":
       return (
-        <div>
-          splash
-          
-          <button onClick={() => setIsServiceLoaded(true)}>Login</button>
-        </div>
+        <SplashTemplate />
       );
     case "LOGIN":
       return <LoginTemplate updateUserAcc={setUserAccount} />
