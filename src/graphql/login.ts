@@ -1,4 +1,4 @@
-import {gql, useMutation} from "@apollo/client";
+import {gql} from "@apollo/client";
 
 export const LOGIN_QUERY = gql`
     mutation GetAccessTokenByID($id : String!) {
@@ -11,6 +11,7 @@ export const LOGIN_QUERY = gql`
             account {
                 isAdmin
                 name
+                id
             }
         }
     }

@@ -1,16 +1,16 @@
 import React, {ReactElement} from "react";
-import Head from "next/head";
+import {Helmet} from "react-helmet";
 
 export type ReportPageProps = {};
 
-const ReportPage = ({} : ReportPageProps) : ReactElement => {
+export const ReportPage = ({} : ReportPageProps) : ReactElement => {
   // TODO : 백엔드 연동
   
   return (
     <div>
-      <Head>
+      <Helmet>
         <title>쓰레기 발견했어요!</title>
-      </Head>
+      </Helmet>
       
       <section>
         <p>
@@ -58,5 +58,3 @@ const ReportPage = ({} : ReportPageProps) : ReactElement => {
     </div>
   )
 }
-
-export default ReportPage

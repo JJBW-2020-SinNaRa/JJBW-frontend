@@ -1,19 +1,19 @@
 import React, {ReactElement} from "react";
-import Head from "next/head";
-import Link from "next/link";
+import {Helmet} from "react-helmet";
+import {Link} from 'react-router-dom';
 
 export type TrashIndexProps = {
   id: number
 }
 
-const TrashIndexPage = ({ id }: TrashIndexProps): ReactElement => {
+export const TrashIndexPage = ({ id }: TrashIndexProps): ReactElement => {
   // TODO : 백엔드 연동
   
   return (
     <div>
-      <Head>
+      <Helmet>
         <title>제목</title>
-      </Head>
+      </Helmet>
       
       <section>
         <div>
@@ -53,18 +53,10 @@ const TrashIndexPage = ({ id }: TrashIndexProps): ReactElement => {
           </div>
         </div>
         
-        <Link href={`${id}/complete`}>
-          <a>처리하기</a>
+        <Link to={`${id}/complete`}>
+          a
         </Link>
       </section>
     </div>
   )
 }
-
-TrashIndexPage.getInitialProps = async ({query}) => {
-  return {
-    id: query.id
-  }
-}
-
-export default TrashIndexPage

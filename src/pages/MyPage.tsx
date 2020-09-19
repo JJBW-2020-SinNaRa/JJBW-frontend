@@ -1,10 +1,10 @@
 import React, {ReactElement, useState} from "react";
-import Head from "next/head";
+import {Helmet} from "react-helmet";
 
 export type MyPageProps = {};
 
 export type MyPageRouteProps = {
-  status: MyPageStatus
+  status: MyPageStatus;
 };
 
 export enum MyPageStatus {
@@ -12,7 +12,7 @@ export enum MyPageStatus {
   REPORT = "REPORT"
 }
 
-const MyPageRoute = ({status} : MyPageRouteProps): ReactElement => {
+const MyPageRoute = ({status}: MyPageRouteProps): ReactElement => {
   switch (status) {
     case MyPageStatus.REPORT:
       return (
@@ -27,18 +27,18 @@ const MyPageRoute = ({status} : MyPageRouteProps): ReactElement => {
         </div>
       )
     default:
-      return null
+      return <div>error</div>
   }
 }
 
-const MyPage = ({} : MyPageProps) : ReactElement => {
+export const MyPage = ({}: MyPageProps): ReactElement => {
   const [pageStatus, setPageStatus] = useState<MyPageStatus>(MyPageStatus.REPORT)
   
   return (
     <div>
-      <Head>
+      <Helmet>
         <title>내 정보</title>
-      </Head>
+      </Helmet>
       
       <section>
         <h1>유저 1</h1>
@@ -64,5 +64,3 @@ const MyPage = ({} : MyPageProps) : ReactElement => {
     </div>
   )
 };
-
-export default MyPage

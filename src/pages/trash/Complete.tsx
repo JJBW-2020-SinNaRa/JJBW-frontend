@@ -1,11 +1,11 @@
 import React, {ReactElement} from "react";
-import Head from "next/head";
+import {Helmet} from "react-helmet";
 
 export type TrashCompleteProps = {
   id: number
 }
 
-const TrashCompletePage = ({id} : TrashCompleteProps) : ReactElement => {
+export const TrashCompletePage = ({id} : TrashCompleteProps) : ReactElement => {
   // todo : 백엔드 연동
   
   const handleReport = () => {
@@ -14,9 +14,9 @@ const TrashCompletePage = ({id} : TrashCompleteProps) : ReactElement => {
   
   return (
     <div>
-      <Head>
+      <Helmet>
         <title>처리 완료</title>
-      </Head>
+      </Helmet>
       
       <section>
         <div>
@@ -45,11 +45,3 @@ const TrashCompletePage = ({id} : TrashCompleteProps) : ReactElement => {
     </div>
   )
 }
-
-TrashCompletePage.getInitialProps = async ({query}) => {
-  return {
-    id: query.id
-  }
-}
-
-export default TrashCompletePage

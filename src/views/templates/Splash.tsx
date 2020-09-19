@@ -1,14 +1,14 @@
-import Head from "next/head";
 import React, {ReactElement} from "react";
+import {Helmet} from "react-helmet";
 
 export type SplashProps = {};
 
 export const SplashTemplate = ({} : SplashProps) : ReactElement => {
   return (
     <div>
-      <Head>
+      <Helmet>
         <title>치워주세요는 준비중입니다</title>
-      </Head>
+      </Helmet>
       
       <h3>
         우리 동네 무단 폐기물

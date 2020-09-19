@@ -1,48 +1,32 @@
-import Head from "next/head";
-import {gql, useQuery} from '@apollo/client'
-import {getApolloClient} from "../../hooks";
+import {Helmet} from "react-helmet";
 import React, {ReactElement} from "react";
-import {UserAccount} from "../../pages";
+import {UserAccounts} from "../../pages/";
 
 export type LoginProps = {
-  updateUserAcc: (account : UserAccount) => void
+  updateUserAcc? : (id: UserAccounts) => void;
 }
 
-export const LoginTemplate = ({updateUserAcc} : LoginProps) : ReactElement => {
-  const {data, loading} = useQuery(gql`
-    query {
-        _
-    }
-  `)
-  
-  if (loading) {
-    console.log('loading...')
-  } else {
-    console.log(data)
-  }
-  
-  const login = async (acc) => {
-    // const client = getApolloClient()
-    // const {data} = await client.query({
-    //   query: gql``
-    // });
-    //
-    // console.debug(data)
+export const LoginTemplate = ({updateUserAcc}: LoginProps): ReactElement => {
+  const login = async (id: UserAccounts) => {
     
-    updateUserAcc(acc)
+  
+    if (updateUserAcc) {
+      updateUserAcc(id)
+    }
   }
   
   return (
     <div>
-      <Head>
+      <Helmet>
         <title>치우기전에, 로그인하세요</title>
-      </Head>
+      </Helmet>
       <ul>
-        {['user1', 'user2', 'admin1'].map((account : UserAccount) => (
-          <li key={account}>
-            <button onClick={() => login(account)}>{account}</button>
-          </li>
-        ))}
+        {[UserAccounts.USER1, UserAccounts.USER2, UserAccounts.ADMIN1]
+          .map((account) => (
+            <li key={account}>
+              <button onClick={() => login(account)}>{account}</button>
+            </li>
+          ))}
       </ul>
     </div>
   )

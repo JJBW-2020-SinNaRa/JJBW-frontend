@@ -1,14 +1,14 @@
 import React, {ReactElement} from "react";
-import Head from "next/head";
+import {Helmet} from "react-helmet";
 
 export type UserHomeProps = {};
 
 export const UserHomeTemplate = ({} : UserHomeProps) : ReactElement => {
   return (
     <div>
-      <Head>
+      <Helmet>
         <title>치워주세요</title>
-      </Head>
+      </Helmet>
       
       USER HOME
     </div>

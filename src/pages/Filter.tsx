@@ -1,14 +1,14 @@
 import React, {ReactElement} from "react";
-import Head from "next/head";
+import {Helmet} from "react-helmet";
 
 export type FilterProps = {}
 
-const FilterPage = ({} : FilterProps) : ReactElement => {
+export const FilterPage = ({} : FilterProps) : ReactElement => {
   return (
     <div>
-      <Head>
+      <Helmet>
         <title>폐기물 필터하기</title>
-      </Head>
+      </Helmet>
       
       <section>
         <h3>보상금 유무</h3>
@@ -33,5 +33,3 @@ const FilterPage = ({} : FilterProps) : ReactElement => {
     </div>
   )
 }
-
-export default FilterPage

@@ -1,14 +1,14 @@
 import React, {ReactElement} from "react";
-import Head from "next/head";
+import {Helmet} from "react-helmet";
 
 export type AdminHomeProps = { };
 
 export const AdminHomeTemplate = ({} : AdminHomeProps) : ReactElement => {
   return (
     <div>
-      <Head>
+      <Helmet>
         <title>치워주세요 - 관리자</title>
-      </Head>
+      </Helmet>
       
       ADMIN HOME
     </div>
