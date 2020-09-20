@@ -10,5 +10,10 @@ export const GlobalStyle = createGlobalStyle`
   
   body {
     padding: 0 24px;
+    
+    #root {
+      max-width: 768px;
+      margin: 0 auto;
+    }
   }
 `;
