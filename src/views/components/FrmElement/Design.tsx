@@ -28,6 +28,7 @@ export const Field = styled.div`
     font-size: 20px;
     margin-bottom: 12px;
     color: #5C5959;
+    margin-left: 24px;
   }
   
   div:not(:last-child) {

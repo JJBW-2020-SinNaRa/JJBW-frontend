@@ -31,10 +31,10 @@ const Links = styled.div`
 `
 
 export type TrashIndexProps = {
-  id: number;
+  match: any;
 }
 
-export const TrashIndexPage = ({id}: TrashIndexProps): ReactElement => {
+export const TrashIndexPage = ({match}: TrashIndexProps): ReactElement => {
   // TODO : 백엔드 연동
   
   return (
@@ -94,7 +94,7 @@ export const TrashIndexPage = ({id}: TrashIndexProps): ReactElement => {
         </Field>
   
         <Links>
-          <Link to={`${id}/complete`}>
+          <Link to={`${match.params.id}/complete`}>
             <SubmitBtn>
               처리하기
             </SubmitBtn>
