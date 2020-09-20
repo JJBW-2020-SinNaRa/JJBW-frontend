@@ -11,6 +11,8 @@ import {Account} from "./graphql";
 import {SplashTemplate} from "./views/templates/Splash";
 import {LoginTemplate} from "./views/templates/Login";
 import {AdminHomeTemplate, UserHomeTemplate} from "./views/templates/Home";
+import {UserHeader} from "./views/components/UserHeader/UserHeader";
+import {Helmet} from "react-helmet";
 
 export enum HomePageStatus {
   SPLASH = "SPLASH",
@@ -87,44 +89,58 @@ const App = ({}: AppProps): ReactElement => {
     
             {userAccount?.id?.includes('admin')
               ? (
-                <Switch>
-                  <Route exact path="/" component={AdminHomeTemplate}/>
-          
-                  <Route path="*">
-                    404
-                  </Route>
-                </Switch>
+                <>
+                  <Helmet>
+                    <title>치워주세요 - 관리자</title>
+                  </Helmet>
+  
+                  <Switch>
+                    <Route exact path="/" component={AdminHomeTemplate}/>
+    
+                    <Route path="*">
+                      404
+                    </Route>
+                  </Switch>
+                </>
               )
               : (
-                <Switch>
-                  {/*홈*/}
-                  <Route exact path="/" component={UserHomeTemplate}/>
-                  {/*홈-1*/}
-                  <Route path="/filter" component={FilterPage}/>
-                  {/*홈-2*/}
-                  <Redirect exact path="/trash" to="/"/>
-                  <Route exact path="/trash/:id" component={TrashIndexPage}/>
-                  <Route path="/trash/:id/complete" component={TrashCompletePage}/>
-          
-                  {/*신고*/}
-                  <Route exact path="/report" component={ReportPage}/>
-          
-                  {/*내 정보*/}
-                  <Route exact path="/mypage" component={MyPage}/>
-                  {/*내 정보-2*/}
-                  <Route exact path="/mypage/send" component={SendKlayPage}/>
-                  {/*내 정보-3*/}
-                  <Route exact path="/mypage/history" component={HistoryPage}/>
-                  {/*내 정보-4*/}
-                  <Route exact path="/mypage/badge" component={BadgePage}/>
-                  <Route exact path="/mypage/badge/:id" component={BadgeDetailPage}/>
-          
-                  <Route exact path="/" component={AdminHomeTemplate}/>
-          
-                  <Route path="*">
-                    404
-                  </Route>
-                </Switch>
+                <>
+                  <Helmet>
+                    <title>치워주세요</title>
+                  </Helmet>
+                  
+                  <UserHeader />
+  
+                  <Switch>
+                    {/*홈*/}
+                    <Route exact path="/" component={UserHomeTemplate}/>
+                    {/*홈-1*/}
+                    <Route path="/filter" component={FilterPage}/>
+                    {/*홈-2*/}
+                    <Redirect exact path="/trash" to="/"/>
+                    <Route exact path="/trash/:id" component={TrashIndexPage}/>
+                    <Route path="/trash/:id/complete" component={TrashCompletePage}/>
+    
+                    {/*신고*/}
+                    <Route exact path="/report" component={ReportPage}/>
+    
+                    {/*내 정보*/}
+                    <Route exact path="/mypage" component={MyPage}/>
+                    {/*내 정보-2*/}
+                    <Route exact path="/mypage/send" component={SendKlayPage}/>
+                    {/*내 정보-3*/}
+                    <Route exact path="/mypage/history" component={HistoryPage}/>
+                    {/*내 정보-4*/}
+                    <Route exact path="/mypage/badge" component={BadgePage}/>
+                    <Route exact path="/mypage/badge/:id" component={BadgeDetailPage}/>
+    
+                    <Route exact path="/" component={AdminHomeTemplate}/>
+    
+                    <Route path="*">
+                      404
+                    </Route>
+                  </Switch>
+                </>
               )}
           </Switch>
           
