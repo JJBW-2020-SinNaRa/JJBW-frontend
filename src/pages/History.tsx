@@ -11,7 +11,7 @@ export const HistoryPage: FC = () => {
       <h3>거래 내역</h3>
       <ul>
         <li>
-          <div>{new Date()}</div>
+          <div>{new Date().toDateString()}</div>
           <div>
             <span>받기 완료</span>
             <span>거래 아이디</span>

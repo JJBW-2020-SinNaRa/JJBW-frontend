@@ -3,7 +3,9 @@ import { useHistory } from "react-router-dom";
 
 export const SendKlayPage: FC = () => {
   return (
-    <div></div>
+    <div>
+      <KlaySend />
+    </div>
   );
 };
 
