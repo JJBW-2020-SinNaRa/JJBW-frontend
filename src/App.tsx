@@ -12,6 +12,8 @@ const App = ({}: AppProps): ReactElement => {
     <Switch>
       <Route exact path="/" component={HomePage} />
       <Route path="/filter" component={FilterPage} />
+      <Route exact path="/mypage" component={MyPage} />
+      <Route path="/mypage/send" component={MyPage} />
       <Route path="/mypage" component={MyPage} />
       <Route path="/report" component={ReportPage} />
       

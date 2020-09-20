@@ -1,5 +1,7 @@
 import React, {
   FC,
+  MutableRefObject,
+  RefObject,
   useLayoutEffect,
   useRef,
 } from "react";
@@ -16,4 +18,15 @@ export const KakaoMap: FC = () => {
     mapRef.current = new kakao.maps.Map(elementRef.current, options);
   }, []);
   return (<div ref={elementRef} style={{ width: "500px", height: "400px" }} />);
+};
+
+export const useKakao = (
+  elementRef: RefObject<HTMLDivElement>,
+  mapRef: MutableRefObject<any>,
+  option: any,
+) => {
+  useLayoutEffect(() => {
+    const kakao = (window as any).kakao;
+    mapRef.current = new kakao.maps.Map(elementRef.current, option);
+  }, []);
 };
