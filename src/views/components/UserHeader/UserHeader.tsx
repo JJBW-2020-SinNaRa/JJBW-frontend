@@ -1,28 +1,16 @@
 import React, {ReactElement} from "react";
-import {Header, HeaderLink} from "./Design";
-import {NavLink} from "react-router-dom";
+import {Header} from "./Design";
+import {NavLink} from "../NavLink/NavLink";
 
 export function UserHeader(): ReactElement {
   
   return (
     <Header>
-      <HeaderLink>
-        <NavLink exact to="/"
-                 activeClassName="active"
-        >홈</NavLink>
-      </HeaderLink>
-      
-      <HeaderLink>
-        <NavLink exact to="/report"
-                 activeClassName="active"
-        >신고</NavLink>
-      </HeaderLink>
-      
-      <HeaderLink>
-        <NavLink exact to="/mypage"
-                 activeClassName="active"
-        >내 정보</NavLink>
-      </HeaderLink>
+      <NavLink exact to="/" text="홈" />
+  
+      <NavLink exact={false} to="/report" text="신고" />
+  
+      <NavLink exact={false} to="/mypage" text="내 정보" />
     </Header>
   )
 }
