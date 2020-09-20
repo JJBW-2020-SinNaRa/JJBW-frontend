@@ -26,7 +26,7 @@ export const FilterTemplate = ({}: FilterTemplateProps): ReactElement => {
       
       <Content>
         <h3>보상금 유무</h3>
-        <ButtonGrid>
+        <ButtonGrid content={3}>
           <Card>
             <Button type="button" onClick={() => setReward(null)} current={hasReward === null}>전체</Button>
           </Card>

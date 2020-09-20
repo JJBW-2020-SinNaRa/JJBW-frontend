@@ -14,9 +14,13 @@ export const Content = styled.div`
   }
 `
 
+type BtnGridProps = {
+  content: number;
+}
+
 export const ButtonGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(${({content}: BtnGridProps) => content}, 1fr);
   grid-column-gap: 6px;
   justify-content: center;
   align-content: center;
