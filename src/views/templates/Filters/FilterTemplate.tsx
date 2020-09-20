@@ -2,7 +2,8 @@ import React, {ReactElement, useCallback, useRef, useState} from "react";
 import {Helmet} from "react-helmet";
 import {useHistory} from "react-router-dom";
 import {Card} from "../../components/Card/Design";
-import {Container, Content, ButtonGrid, Button, Input, SubmitBtn} from "./Design";
+import {Container, Content, ButtonGrid} from "./Design";
+import { Button, Input, SubmitBtn } from "../../components/FrmElement/Design"
 
 export type FilterTemplateProps = {}
 
