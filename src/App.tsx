@@ -114,8 +114,8 @@ const App = ({}: AppProps): ReactElement => {
                   <Switch>
                     {/*홈*/}
                     <Route exact path="/" component={UserHomeTemplate}/>
-                    {/*홈-1*/}
-                    <Route path="/filter" component={FilterPage}/>
+                    <Route exact path="/filter" component={UserHomeTemplate}/>
+                    
                     {/*홈-2*/}
                     <Redirect exact path="/trash" to="/"/>
                     <Route exact path="/trash/:id" component={TrashIndexPage}/>
