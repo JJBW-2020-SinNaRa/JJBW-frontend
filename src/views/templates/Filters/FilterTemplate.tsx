@@ -2,9 +2,9 @@ import React, { ReactElement, useCallback, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
 
-export type FilterProps = {}
+export type FilterTemplateProps = {}
 
-export const FilterPage = ({ }: FilterProps): ReactElement => {
+export const FilterTemplate = ({ }: FilterTemplateProps): ReactElement => {
   const [hasReward, setReward] = useState<boolean | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const locationRef = useRef<HTMLInputElement>(null);
@@ -12,15 +12,15 @@ export const FilterPage = ({ }: FilterProps): ReactElement => {
   const applyFileter = useCallback(() => {
     const search = searchRef.current?.value;
     const location = locationRef.current?.value;
-    // const query = 
+    // const query =
     // history.push()
   }, []);
   return (
     <div>
       <Helmet>
-        <title>폐기물 필터하기</title>
+        <title>폐기물 필터</title>
       </Helmet>
-
+      
       <section>
         <h3>보상금 유무</h3>
         <ul>
@@ -34,13 +34,13 @@ export const FilterPage = ({ }: FilterProps): ReactElement => {
             <button type="button" onClick={() => setReward(false)}>없음</button>
           </li>
         </ul>
-
+        
         <h3>폐기물 종류</h3>
         <input type="text" ref={searchRef} placeholder="검색할 폐기물을 입력하세요." />
-
+        
         <h3>폐기물 위치</h3>
         <input type="text" ref={locationRef} placeholder="폐기물의 위치를 읍 면 리의 형태로 입력하세요." />
-
+        
         <button>적용</button>
       </section>
     </div >

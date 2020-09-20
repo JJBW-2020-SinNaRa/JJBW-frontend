@@ -1,7 +1,7 @@
 import React, {ReactElement, useEffect, useState} from "react";
 import {Route, Switch, Redirect} from 'react-router-dom'
 
-import {FilterPage, MyPage, ReportPage, TrashIndexPage, TrashCompletePage} from "./pages";
+import {MyPage, ReportPage, TrashIndexPage, TrashCompletePage} from "./pages";
 import {BadgePage} from "./pages/mypage/Badge";
 import {BadgeDetailPage} from "./pages/mypage/BadgeDetail";
 import {Debug} from "./pages/Debug";
