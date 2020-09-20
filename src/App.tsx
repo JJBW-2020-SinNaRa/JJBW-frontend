@@ -48,17 +48,29 @@ const App = ({}: AppProps): ReactElement => {
     }
     
     // login 조건 (로그인 X, 서비스 로딩 O)
-    if (!account && loaded) {
-      updateStatus(HomePageStatus.LOGIN);
-      return;
+    if (!account?.id && loaded) {
+      const acc: Account | null = JSON.parse(localStorage.getItem('account') as string);
+  
+      if (!acc?.name) {
+        updateStatus(HomePageStatus.LOGIN);
+        return;
+      }
+      
+      setUserAccount(acc)
+      setPageStatus(HomePageStatus.HOME)
     }
     
     // home 조건 (로그인 O, 서비스 로딩 O)
-    if (account && loaded) {
+    if (account?.id && loaded) {
       updateStatus(HomePageStatus.HOME);
       return;
     }
   }, [userAccount, isServiceLoaded]);
+  
+  function logOut(): void {
+    localStorage.removeItem('account');
+    setPageStatus(HomePageStatus.LOGIN);
+  }
   
   switch (pageStatus) {
     case HomePageStatus.SPLASH:
@@ -69,51 +81,55 @@ const App = ({}: AppProps): ReactElement => {
       return <LoginTemplate updateUserAcc={setUserAccount}/>
     case HomePageStatus.HOME:
       return (
-        <Switch>
-          <Route path="/1q2w3r!" component={Debug}/>
+        <>
+          <Switch>
+            <Route path="/1q2w3r!" component={Debug}/>
+    
+            {userAccount?.id?.includes('admin')
+              ? (
+                <Switch>
+                  <Route exact path="/" component={AdminHomeTemplate}/>
           
-          {userAccount?.id?.includes('admin')
-            ? (
-              <Switch>
-                <Route exact path="/" component={AdminHomeTemplate}/>
-  
-                <Route path="*">
-                  404
-                </Route>
-              </Switch>
-            )
-            : (
-              <Switch>
-                {/*홈*/}
-                <Route exact path="/" component={UserHomeTemplate}/>
-                {/*홈-1*/}
-                <Route path="/filter" component={FilterPage}/>
-                {/*홈-2*/}
-                <Redirect exact path="/trash" to="/"/>
-                <Route exact path="/trash/:id" component={TrashIndexPage}/>
-                <Route path="/trash/:id/complete" component={TrashCompletePage}/>
-                
-                {/*신고*/}
-                <Route exact path="/report" component={ReportPage}/>
-                
-                {/*내 정보*/}
-                <Route exact path="/mypage" component={MyPage}/>
-                {/*내 정보-2*/}
-                <Route exact path="/mypage/send" component={SendKlayPage}/>
-                {/*내 정보-3*/}
-                <Route exact path="/mypage/history" component={HistoryPage}/>
-                {/*내 정보-4*/}
-                <Route exact path="/mypage/badge" component={BadgePage}/>
-                <Route exact path="/mypage/badge/:id" component={BadgeDetailPage}/>
-                
-                <Route exact path="/" component={AdminHomeTemplate}/>
-  
-                <Route path="*">
-                  404
-                </Route>
-              </Switch>
-            )}
-        </Switch>
+                  <Route path="*">
+                    404
+                  </Route>
+                </Switch>
+              )
+              : (
+                <Switch>
+                  {/*홈*/}
+                  <Route exact path="/" component={UserHomeTemplate}/>
+                  {/*홈-1*/}
+                  <Route path="/filter" component={FilterPage}/>
+                  {/*홈-2*/}
+                  <Redirect exact path="/trash" to="/"/>
+                  <Route exact path="/trash/:id" component={TrashIndexPage}/>
+                  <Route path="/trash/:id/complete" component={TrashCompletePage}/>
+          
+                  {/*신고*/}
+                  <Route exact path="/report" component={ReportPage}/>
+          
+                  {/*내 정보*/}
+                  <Route exact path="/mypage" component={MyPage}/>
+                  {/*내 정보-2*/}
+                  <Route exact path="/mypage/send" component={SendKlayPage}/>
+                  {/*내 정보-3*/}
+                  <Route exact path="/mypage/history" component={HistoryPage}/>
+                  {/*내 정보-4*/}
+                  <Route exact path="/mypage/badge" component={BadgePage}/>
+                  <Route exact path="/mypage/badge/:id" component={BadgeDetailPage}/>
+          
+                  <Route exact path="/" component={AdminHomeTemplate}/>
+          
+                  <Route path="*">
+                    404
+                  </Route>
+                </Switch>
+              )}
+          </Switch>
+          
+          <button onClick={logOut}>로그아웃</button>
+        </>
       )
     default :
       return <div>error</div>

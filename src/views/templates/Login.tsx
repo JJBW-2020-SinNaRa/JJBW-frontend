@@ -24,6 +24,10 @@ export const LoginTemplate = ({updateUserAcc}: LoginProps): ReactElement => {
         "token",
         data.getAccessTokenByID.token
       )
+      localStorage.setItem(
+        "account",
+        JSON.stringify(data.getAccessTokenByID.account)
+      )
   
       if (updateUserAcc) {
         updateUserAcc(data.getAccessTokenByID.account)
