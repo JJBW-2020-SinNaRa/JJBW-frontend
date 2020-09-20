@@ -1,10 +1,12 @@
-import React, { ReactElement, useCallback, useRef, useState } from "react";
-import { Helmet } from "react-helmet";
-import { useHistory } from "react-router-dom";
+import React, {ReactElement, useCallback, useRef, useState} from "react";
+import {Helmet} from "react-helmet";
+import {useHistory} from "react-router-dom";
+import {Card} from "../../components/Card/Design";
+import {Container, Content, ButtonGrid, Button, Input, SubmitBtn} from "./Design";
 
 export type FilterTemplateProps = {}
 
-export const FilterTemplate = ({ }: FilterTemplateProps): ReactElement => {
+export const FilterTemplate = ({}: FilterTemplateProps): ReactElement => {
   const [hasReward, setReward] = useState<boolean | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const locationRef = useRef<HTMLInputElement>(null);
@@ -16,33 +18,36 @@ export const FilterTemplate = ({ }: FilterTemplateProps): ReactElement => {
     // history.push()
   }, []);
   return (
-    <div>
+    <Container>
       <Helmet>
         <title>폐기물 필터</title>
       </Helmet>
       
-      <section>
+      <Content>
         <h3>보상금 유무</h3>
-        <ul>
-          <li>
-            <button type="button" onClick={() => setReward(null)}>전체</button>
-          </li>
-          <li>
-            <button type="button" onClick={() => setReward(true)}>있음</button>
-          </li>
-          <li>
-            <button type="button" onClick={() => setReward(false)}>없음</button>
-          </li>
-        </ul>
-        
-        <h3>폐기물 종류</h3>
-        <input type="text" ref={searchRef} placeholder="검색할 폐기물을 입력하세요." />
-        
+        <ButtonGrid>
+          <Card>
+            <Button type="button" onClick={() => setReward(null)} current={hasReward === null}>전체</Button>
+          </Card>
+          <Card>
+            <Button type="button" onClick={() => setReward(true)} current={hasReward === true}>있음</Button>
+          </Card>
+          <Card>
+            <Button type="button" onClick={() => setReward(false)} current={hasReward === false}>없음</Button>
+          </Card>
+        </ButtonGrid>
+      </Content>
+      
+      <Content>
         <h3>폐기물 위치</h3>
-        <input type="text" ref={locationRef} placeholder="폐기물의 위치를 읍 면 리의 형태로 입력하세요." />
-        
-        <button>적용</button>
-      </section>
-    </div >
+        <Card>
+          <Input type="text" ref={locationRef} placeholder="폐기물의 위치를 읍 면 리의 형태로 입력하세요."/>
+        </Card>
+      </Content>
+  
+      <Content>
+        <SubmitBtn>적용</SubmitBtn>
+      </Content>
+    </Container>
   )
 }
