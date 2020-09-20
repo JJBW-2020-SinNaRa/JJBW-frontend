@@ -1,5 +1,6 @@
 import React, {ReactElement} from "react";
-import {TrashCardContainer, ImageContainer, TextContainer} from "./Design";
+import {Card} from "../Card/Design";
+import {Container, ImageContainer, TextContainer} from "./Design";
 import {getBigAddress} from "../../../lib/address";
 
 export enum Status {
@@ -30,20 +31,22 @@ export const TrashCard = ({status, imageSrc, location, trashKind, klay, recommen
   }
   
   return (
-    <TrashCardContainer>
-      <ImageContainer>
-        <img src={imageSrc} alt="폐기물 이미지"/>
-      </ImageContainer>
-      
-      <TextContainer>
-        <h2><img src="/assets/icons/location1x.svg"/> {getBigAddress(location)}</h2>
-        <h2><img src="/assets/icons/trash1x.svg"/> {trashKind}</h2>
-        <h2><img src="/assets/icons/klay1x.svg"/> {status === Status.READY ? "준비중" : klay}</h2>
+    <Card>
+      <Container>
+        <ImageContainer>
+          <img src={imageSrc} alt="폐기물 이미지"/>
+        </ImageContainer>
         
-        <span>
+        <TextContainer>
+          <h2><img src="/assets/icons/location1x.svg"/> {getBigAddress(location)}</h2>
+          <h2><img src="/assets/icons/trash1x.svg"/> {trashKind}</h2>
+          <h2><img src="/assets/icons/klay1x.svg"/> {status === Status.READY ? "준비중" : klay}</h2>
+          
+          <span>
           <img src="/assets/icons/thumbs-up1x.svg"/> {recommend}
         </span>
-      </TextContainer>
-    </TrashCardContainer>
+        </TextContainer>
+      </Container>
+    </Card>
   )
 }
