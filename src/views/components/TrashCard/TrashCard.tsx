@@ -2,6 +2,7 @@ import React, {ReactElement} from "react";
 import {Card} from "../Card/Design";
 import {Container, ImageContainer, TextContainer} from "./Design";
 import {getBigAddress} from "../../../lib/address";
+import {Link} from "react-router-dom";
 
 export enum Status {
   READY = "READY",
@@ -10,6 +11,7 @@ export enum Status {
 }
 
 export type TrashCardProps = {
+  id: number;
   status: Status;
   imageSrc: string;
   location: string;
@@ -18,7 +20,7 @@ export type TrashCardProps = {
   recommend: number;
 };
 
-export const TrashCard = ({status, imageSrc, location, trashKind, klay, recommend}: TrashCardProps): ReactElement => {
+export const TrashCard = ({id, status, imageSrc, location, trashKind, klay, recommend}: TrashCardProps): ReactElement => {
   const statusToText = (status: Status) => {
     switch (status) {
       case Status.FINISHED:
@@ -32,21 +34,23 @@ export const TrashCard = ({status, imageSrc, location, trashKind, klay, recommen
   
   return (
     <Card>
-      <Container>
-        <ImageContainer>
-          <img src={imageSrc} alt="폐기물 이미지"/>
-        </ImageContainer>
-        
-        <TextContainer>
-          <h2><img src="/assets/icons/location1x.svg"/> {getBigAddress(location)}</h2>
-          <h2><img src="/assets/icons/trash1x.svg"/> {trashKind}</h2>
-          <h2><img src="/assets/icons/klay1x.svg"/> {status === Status.READY ? "준비중" : klay}</h2>
-          
-          <span>
+      <Link to={`/trash/${id}`}>
+        <Container>
+          <ImageContainer>
+            <img src={imageSrc} alt="폐기물 이미지"/>
+          </ImageContainer>
+    
+          <TextContainer>
+            <h2><img src="/assets/icons/location1x.svg"/> {getBigAddress(location)}</h2>
+            <h2><img src="/assets/icons/trash1x.svg"/> {trashKind}</h2>
+            <h2><img src="/assets/icons/klay1x.svg"/> {status === Status.READY ? "준비중" : klay}</h2>
+      
+            <span>
           <img src="/assets/icons/thumbs-up1x.svg"/> {recommend}
         </span>
-        </TextContainer>
-      </Container>
+          </TextContainer>
+        </Container>
+      </Link>
     </Card>
   )
 }
