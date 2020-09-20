@@ -1,11 +1,15 @@
-import React, {ReactElement} from "react";
+import React, {ReactElement, useState} from "react";
 import {Helmet} from "react-helmet";
 import {ReportFormTemplate} from "../views/templates/ReportFormTemplate/ReportFormTemplate";
+import {CompleteTemplate} from "../views/templates/CompleteTemplate/CompleteTemplate";
 
 export type ReportPageProps = {};
 
 export const ReportPage = ({}: ReportPageProps): ReactElement => {
-  // TODO : 백엔드 연동
+  const [state, setState] = useState(0);
+  const handleSubmit = (): void => {
+    setState(1);
+  }
   
   return (
     <div>
@@ -14,7 +18,7 @@ export const ReportPage = ({}: ReportPageProps): ReactElement => {
       </Helmet>
       
       <section>
-        <ReportFormTemplate />
+        {state ? <CompleteTemplate content={"폐기물 신고가\n완료되었습니다."} /> : <ReportFormTemplate onComplete={handleSubmit} />}
       </section>
     </div>
   )

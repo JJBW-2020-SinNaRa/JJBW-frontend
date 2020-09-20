@@ -1,13 +1,37 @@
-import React, {ReactElement} from "react";
+import React, {ReactElement, useState} from "react";
 import {Helmet} from "react-helmet";
 import {Card} from "../../components/Card/Design";
 import {Textarea, Input, SubmitBtn, Field, Text} from "../../components/FrmElement/Design";
 import {Container} from "./Design";
 
-export type ReportFormTemplateProps = {};
+export type ReportFormTemplateProps = {
+  onComplete: () => void;
+};
 
-export const ReportFormTemplate = ({}: ReportFormTemplateProps): ReactElement => {
-  // TODO : 백엔드 연동
+export const ReportFormTemplate = ({onComplete}: ReportFormTemplateProps): ReactElement => {
+  const [state, setState] = useState<any>({});
+  
+  const handleUpdate = (e: any): void => {
+    const {name, value, files} = e.target;
+    
+    if (name === 'file') {
+      setState({
+        ...state,
+        [name]: files[0]
+      })
+      return
+    }
+    
+    setState({
+      ...state,
+      [name]: value
+    })
+  }
+  
+  const handleSubmit = () => {
+    console.log(state)
+    onComplete()
+  };
   
   return (
     <div>
@@ -27,43 +51,43 @@ export const ReportFormTemplate = ({}: ReportFormTemplateProps): ReactElement =>
         <Field>
           <h3>폐기물 설명</h3>
           <Card>
-            <Textarea />
+            <Textarea onChange={handleUpdate} name="desc" required />
           </Card>
         </Field>
         
         <Field>
           <h3>폐기물 위치</h3>
           <Card>
-            <Input type="text" placeholder={"도로명주소"} />
+            <Input type="text" placeholder={"도로명주소"} onChange={handleUpdate} name="addr1" required />
           </Card>
           
           <Card>
-            <Input type="text" placeholder={"세부주소"} />
+            <Input type="text" placeholder={"세부주소"} onChange={handleUpdate} name="addr2"  required/>
           </Card>
         </Field>
         
         <Field>
           <h3>폐기물 종류</h3>
           <Card>
-            <Input type="text" placeholder={"폐기물 종류 기입"}/>
+            <Input type="text" placeholder={"폐기물 종류 기입"} onChange={handleUpdate} name="kind" required/>
           </Card>
         </Field>
         
         <Field>
           <h3>발견 시기</h3>
           <Card>
-            <Input type="text" placeholder={"언제 발견했는지 기입"} />
+            <Input type="text" placeholder={"언제 발견했는지 기입"} onChange={handleUpdate} name="time"  required/>
           </Card>
         </Field>
         
         <Field>
           <h3>사진 업로드</h3>
           <Card>
-            <Input type="file" />
+            <Input type="file"  onChange={handleUpdate} name="file" required/>
           </Card>
         </Field>
         
-        <SubmitBtn>
+        <SubmitBtn onClick={handleSubmit}>
           신고하기
         </SubmitBtn>
       </Container>
