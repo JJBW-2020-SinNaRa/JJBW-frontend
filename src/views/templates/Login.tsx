@@ -1,6 +1,6 @@
 import {Helmet} from "react-helmet";
 import React, {ReactElement} from "react";
-import {UserAccounts} from "../../pages/";
+import {UserAccounts} from "../../App";
 import {useMutation} from "@apollo/client";
 import {LOGIN_QUERY} from "../../graphql";
 import {Account} from "../../graphql";
